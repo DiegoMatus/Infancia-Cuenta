@@ -73,6 +73,11 @@
         <item name="domain_7">Educación</item>
         <item name="domain_8">Salud</item>
     </array>
+    
+    <string name="page1">La Infancia Cuenta en México es un sistema de indicadores en derechos de la infancia, desarrollado por la REDIM.</string>
+    <string name="page2">Consulta la información de los indicadores integrados, tomados del INEGI.</string>
+    <string name="page3">Con esta consulta se trata de identificar los temas de preocupación e interés de niños y niñas sobre sus derechos.</string>
+    <string name="page4">Mantente en contacto de la últimas noticias, através de nuestra cuenta oficial en Twitter</string>
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
 </resources>

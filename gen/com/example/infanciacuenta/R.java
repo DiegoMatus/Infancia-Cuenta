@@ -55,22 +55,23 @@ public final class R {
         public static final int white=0x7f02000c;
     }
     public static final class id {
-        public static final int date_tweet=0x7f0a000d;
-        public static final int drawer_layout=0x7f0a0000;
-        public static final int frame_container=0x7f0a0001;
-        public static final int icon=0x7f0a0006;
-        public static final int list_slidermenu=0x7f0a0002;
-        public static final int logo=0x7f0a0003;
-        public static final int name_tweet=0x7f0a000c;
-        public static final int search=0x7f0a000b;
-        public static final int separator=0x7f0a0004;
-        public static final int spinner_domains=0x7f0a0009;
-        public static final int spinner_indicators=0x7f0a000a;
-        public static final int spinner_states=0x7f0a0008;
-        public static final int text_tweet=0x7f0a000e;
-        public static final int title=0x7f0a0007;
-        public static final int tweets_list=0x7f0a000f;
-        public static final int viewPager=0x7f0a0005;
+        public static final int date_tweet=0x7f0a000e;
+        public static final int drawer_layout=0x7f0a0001;
+        public static final int frame_container=0x7f0a0002;
+        public static final int icon=0x7f0a0007;
+        public static final int list_slidermenu=0x7f0a0003;
+        public static final int logo=0x7f0a0004;
+        public static final int name_tweet=0x7f0a000d;
+        public static final int result_webview=0x7f0a0000;
+        public static final int search=0x7f0a000c;
+        public static final int separator=0x7f0a0005;
+        public static final int spinner_domains=0x7f0a000a;
+        public static final int spinner_indicators=0x7f0a000b;
+        public static final int spinner_states=0x7f0a0009;
+        public static final int text_tweet=0x7f0a000f;
+        public static final int title=0x7f0a0008;
+        public static final int tweets_list=0x7f0a0010;
+        public static final int viewPager=0x7f0a0006;
     }
     public static final class layout {
         public static final int activity_graph=0x7f030000;
@@ -89,7 +90,7 @@ public final class R {
         public static final int app_name=0x7f060000;
         /**  Content Description 
          */
-        public static final int desc_list_item_icon=0x7f06000b;
+        public static final int desc_list_item_icon=0x7f06000f;
         public static final int domain=0x7f060007;
         public static final int drawer_close=0x7f060005;
         public static final int drawer_open=0x7f060004;
@@ -97,6 +98,10 @@ public final class R {
         public static final int indicator=0x7f060008;
         public static final int login=0x7f06000a;
         public static final int logoDescription=0x7f060003;
+        public static final int page1=0x7f06000b;
+        public static final int page2=0x7f06000c;
+        public static final int page3=0x7f06000d;
+        public static final int page4=0x7f06000e;
         public static final int search=0x7f060009;
         public static final int state=0x7f060006;
     }

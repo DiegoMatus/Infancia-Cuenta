@@ -1,5 +1,7 @@
 package mx.infanciacuenta.adapters;
 
+import com.example.infanciacuenta.R;
+
 import mx.infanciacuenta.MainActivity;
 
 import android.app.Activity;
@@ -8,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -19,6 +22,8 @@ public class ViewAdapter extends PagerAdapter {
 	ViewPager view = null;
 	TextView label1;
 	TextView label2;
+	TextView label3;
+	TextView label4;
 	Button startButton;
 
     View views[];
@@ -29,18 +34,35 @@ public class ViewAdapter extends PagerAdapter {
     	
     	label1 = new TextView(context);
     	label2 = new TextView(context);
+    	label3 = new TextView(context);
+    	label4 = new TextView(context);
     	startButton = new Button(context);
     	
-    	label1.setText("Los derechos de los ni???os bla bla bla bla bla........");
+    	label1.setText(R.string.page1);
     	label1.setTextColor(Color.WHITE);
-    	label1.setTextSize(24);
-    	label2.setText("Los derechos de los ni???os bla bla bla bla bla xsd xd dsx cd xsd........");
+    	label1.setTextSize(20);
+    	label1.setGravity(Gravity.CENTER);
+    	
+    	label2.setText(R.string.page2);
     	label2.setTextColor(Color.WHITE);
-    	label2.setTextSize(24);
+    	label2.setTextSize(20);
+    	label2.setGravity(Gravity.CENTER);
+    	
+    	label3.setText(R.string.page3);
+    	label3.setTextColor(Color.WHITE);
+    	label3.setTextSize(20);
+    	label3.setGravity(Gravity.CENTER);
+    	
+    	label4.setText(R.string.page4);
+    	label4.setTextColor(Color.WHITE);
+    	label4.setTextSize(20);
+    	label4.setGravity(Gravity.CENTER);
+    	
     	startButton.setText("Empezar");
-    	startButton.setBackgroundColor(Color.WHITE);
-    	startButton.setTextColor(Color.RED);
+    	startButton.setBackgroundColor(Color.argb(255, 222, 70, 59));
+    	startButton.setTextColor(Color.WHITE);
     	startButton.setTextSize(28);
+    
     	startButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -51,7 +73,7 @@ public class ViewAdapter extends PagerAdapter {
 			}
 		});
     	
-    	views = new View[]{label1, label2, startButton};
+    	views = new View[]{label1, label2, label3, label4, startButton};
     }
 
 	@Override

@@ -83,9 +83,15 @@ public class MainFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getActivity(), GraphActivity.class);
-				i.putExtra("title", indicators.getSelectedItemPosition() == 0 ? domains.getSelectedItem().toString() : indicators.getSelectedItem().toString());
-				startActivity(i);
+				if(!working){
+					Intent i = new Intent(getActivity(), GraphActivity.class);
+					i.putExtra("dominio", resources[domains.getSelectedItemPosition()-1]);
+					if(indicators.getSelectedItem() != null){
+						i.putExtra("indicador", indicators.getSelectedItemPosition() != 0 ? indicators.getSelectedItem().toString() : "");
+					}
+					i.putExtra("estado", states.getSelectedItem().toString());
+					startActivity(i);
+				}
 			}
 		});
         return rootView;
@@ -95,7 +101,7 @@ public class MainFragment extends Fragment {
 		@Override
 		protected String doInBackground(Void... params) {
 			try{
-	        	URI uri=new URI("http://192.168.1.65:8000/home/indicadores/");
+	        	URI uri=new URI("http://192.168.1.66:8000/home/indicadores/");
 	            HttpResponse response=null;
 		        ArrayList<BasicNameValuePair> parametros= new ArrayList<BasicNameValuePair>();
 		         
