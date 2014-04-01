@@ -1,15 +1,18 @@
 package mx.infanciacuenta.fragments;
 
+import java.util.List;
+
+import mx.infanciacuenta.TwitterStatics;
+import mx.infanciacuenta.adapters.TweetsAdapter;
 
 import com.example.infanciacuenta.R;
-import com.example.infanciacuenta.TwitterStatics;
 
+import twitter4j.Paging;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -24,21 +27,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class TwitterFragment extends Fragment{
 	private Twitter mTwitter;
     private RequestToken mRequestToken;
     private SharedPreferences mPrefs;
-    private Activity context;
+    private ListView list_tweets;
     
-    public TwitterFragment(){
-    	context = getActivity();
-    }
+    public TwitterFragment(){}
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,18 +47,12 @@ public class TwitterFragment extends Fragment{
 		mPrefs = getActivity().getSharedPreferences("twitterPrefs", Context.MODE_PRIVATE);
         mTwitter = new TwitterFactory().getInstance();
         mTwitter.setOAuthConsumer(TwitterStatics.TWITTER_CONSUMER_KEY, TwitterStatics.TWITTER_CONSUMER_SECRET);
-        Button login = (Button)view.findViewById(R.id.login_twitter);
-        login.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				onClick_Login(v);
-			}
-		});
+        list_tweets = (ListView)view.findViewById(R.id.tweets_list);
+        onClick_Login();
         return view;
 	}
 	
-	private void onClick_Login(View button){
+	private void onClick_Login(){
         if (mPrefs.contains(TwitterStatics.PREF_ACCESS_TOKEN) && !TextUtils.isEmpty(mPrefs.getString(TwitterStatics.PREF_ACCESS_TOKEN, null))) {
             loginAuthorisedUser();
         } else {
@@ -121,6 +115,14 @@ public class TwitterFragment extends Fragment{
                                             mTwitter.setOAuthAccessToken(result);
                                             saveAccessToken(result);
                                             Toast.makeText(getActivity(), "usuario logueado", Toast.LENGTH_SHORT).show();
+                                            new Thread(new Runnable() {
+                                    			
+                                    			@Override
+                                    			public void run() {
+                                    				// TODO Auto-generated method stub
+                                    				showTweets();
+                                    			}
+                                    		}).start();
                                         }
                                     }
                                 }.execute(verifier);
@@ -131,7 +133,7 @@ public class TwitterFragment extends Fragment{
                     });
                     dialog.show();
                 }
-            }
+            } 
         }.execute();
     }
 
@@ -140,7 +142,14 @@ public class TwitterFragment extends Fragment{
         String secret = mPrefs.getString(TwitterStatics.PREF_ACCESS_TOKEN_SECRET, null);
         AccessToken at = new AccessToken(token, secret);
         mTwitter.setOAuthAccessToken(at);
-        Toast.makeText(context, "usuario logueado", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "usuario logueado", Toast.LENGTH_SHORT).show();
+        new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				showTweets();
+			}
+		}).start();
     }
     
     private void saveAccessToken(AccessToken at) {
@@ -150,6 +159,23 @@ public class TwitterFragment extends Fragment{
         editor.putString(TwitterStatics.PREF_ACCESS_TOKEN, token);
         editor.putString(TwitterStatics.PREF_ACCESS_TOKEN_SECRET, secret);
         editor.commit();
+    }
+    
+    private void showTweets(){
+    	try {
+        	Paging paging = new Paging(1, 200); 
+        	final List<twitter4j.Status> stats = mTwitter.getUserTimeline(271733547, paging);
+        	getActivity().runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+		        	list_tweets.setVisibility(View.VISIBLE);
+		        	list_tweets.setAdapter(new TweetsAdapter(getActivity(), R.layout.tweet_item, stats));
+				}
+			});
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
     }
 
 }

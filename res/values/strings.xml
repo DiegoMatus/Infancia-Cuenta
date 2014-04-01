@@ -1,34 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">InfanciaCuenta</string>
+    <string name="app_name">Infancia Cuenta</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="logoDescription">Infancia Cuenta</string>
 	<string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
+    <string name="state">Estado</string>
+    <string name="domain">Dominio</string>
+    <string name="indicator">Indicador</string>
+    <string name="search">Buscar</string>
+    <string name="login">Iniciar Sesión</string>
     
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
-        <item >Home</item>
-        <item >Find People</item>
-        <item >Photos</item>
-        <item >Communities</item>
-        <item >Pages</item>
-        <item >What\'s Hot</item>
+        <item >Búsqueda</item>
+        <item >Noticias</item>
+        <item >Infografías</item>
     </string-array>
     
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
-        <item>@drawable/ic_launcher</item>
-        <item>@drawable/ic_launcher</item>
-        <item>@drawable/ic_launcher</item>
-        <item>@drawable/ic_launcher</item>
-        <item>@drawable/ic_launcher</item>
-        <item>@drawable/ic_launcher</item>
+        <item>@drawable/search1</item>
+        <item>@drawable/twitter_icon</item>
+        <item>@drawable/white</item>
     </array>
-    
+    <array name="states">
+        <item >Aguascalientes</item>
+        <item >Baja California</item>
+        <item >Baja California Sur</item>
+        <item >Campeche</item>
+        <item >Coahuila</item>
+        <item >Colima</item>
+        <item >Chiapas</item>
+        <item >Chihuahua</item>
+        <item >Distrito Federal</item>
+        <item >Durango</item>
+        <item >Guanajuato</item>
+        <item >Guerrero</item>
+        <item >Hidalgo</item>
+        <item >Jalisco</item>
+        <item >México</item>
+        <item >Michoacán</item>
+        <item >Morelos</item>
+        <item >Nayarit</item>
+        <item >Nuevo León</item>
+        <item >Oaxaca</item>
+        <item >Puebla</item>
+        <item >Querétaro</item>
+        <item >Quintana Roo</item>
+        <item >San Luis Potosí</item>
+        <item >Sinaloa</item>
+        <item >Sonora</item>
+        <item >Tabasco</item>
+        <item >Tamaulipas</item>
+        <item >Tlaxcala</item>
+        <item >Veracruz</item>
+        <item >Yucatán</item>
+        <item >Zacatecas</item>
+        <item >República Mexicana</item>
+    </array>
+    <array name="domains">
+        <item>------------------</item>
+        <item name="2804dd9b-9d30-4fcd-aee9-70a309013197">Demografía</item>
+        <item name="domain_2">Legislación</item>
+        <item name="domain_3">Economía</item>
+        <item name="domain_4">Hábitat</item>
+        <item name="domain_5">Ciudadanía</item>
+        <item name="domain_6">Seguridad</item>
+        <item name="domain_7">Educación</item>
+        <item name="domain_8">Salud</item>
+    </array>
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
 </resources>
