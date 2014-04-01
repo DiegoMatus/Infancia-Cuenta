@@ -1,8 +1,9 @@
 package mx.infanciacuenta.fragments;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
+
+import mx.infanciacuenta.GraphActivity;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -19,13 +20,16 @@ import org.json.JSONObject;
 import com.example.infanciacuenta.R;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
 
@@ -34,11 +38,19 @@ public class MainFragment extends Fragment {
 	private Spinner states;
 	private Spinner domains;
 	private Spinner indicators;
+	private Button search;
 	private boolean working = false;
 	public MainFragment(){}
 	
 	String resources[] = {
-		"2804dd9b-9d30-4fcd-aee9-70a309013197"	
+		"2804dd9b-9d30-4fcd-aee9-70a309013197",
+		"3edc67fa-5dbd-4105-91f5-08000a4f082b",
+		"be1b054b-61df-4207-b1f0-5a8a4b2714e4",
+		"f2bc328f-7768-4824-b5af-01a7f60a4a5e",
+		"a1f77c6b-d20c-4107-8315-0f559d2eb486",
+		"80be1759-3f80-4897-946a-1628082785a4",
+		"be43f8cf-9765-4512-86f6-66b278e4ecd0",
+		"f4230fab-7b36-4ea9-892e-baa7c3d38d26"
 	};
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +76,16 @@ public class MainFragment extends Fragment {
 			public void onNothingSelected(AdapterView<?> arg0) {
 				// TODO Auto-generated method stub
 				
+			}
+		});
+        search = (Button)rootView.findViewById(R.id.search);
+        search.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getActivity(), GraphActivity.class);
+				i.putExtra("title", indicators.getSelectedItemPosition() == 0 ? domains.getSelectedItem().toString() : indicators.getSelectedItem().toString());
+				startActivity(i);
 			}
 		});
         return rootView;

@@ -26,6 +26,8 @@
         </activity>
         <activity android:name="mx.infanciacuenta.MainActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name="mx.infanciacuenta.GraphActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

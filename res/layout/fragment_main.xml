@@ -45,6 +45,7 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:padding="5dp"
+	    android:id="@+id/search"
 	    android:layout_margin="15dp"
 	    android:text="@string/search"/>
 </LinearLayout>
