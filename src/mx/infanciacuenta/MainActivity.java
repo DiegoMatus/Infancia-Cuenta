@@ -77,7 +77,7 @@ public class MainActivity extends Activity {
 		if (savedInstanceState == null) {
 			displayView(0);
 		}
-		getActionBar().setIcon(getResources().getDrawable(R.drawable.logo_navigation));
+		getActionBar().setIcon(getResources().getDrawable(R.drawable.iconavigation));
 	}
 
 	/**

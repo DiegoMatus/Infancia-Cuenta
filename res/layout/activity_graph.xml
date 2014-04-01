@@ -2,11 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E0E0E0"
     android:orientation="vertical" >
     
     <WebView 
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="horizontal"
+        android:layout_height="250dp"
+        android:scrollbars="none"
         android:id="@+id/result_webview"/>
+    <ListView 
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:padding="5dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="5.0px"
+        android:id="@+id/simbology"
+        android:entries="@array/states"></ListView>
 </LinearLayout>

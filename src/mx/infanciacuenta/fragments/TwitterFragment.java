@@ -15,6 +15,7 @@ import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -37,7 +38,7 @@ public class TwitterFragment extends Fragment{
     private RequestToken mRequestToken;
     private SharedPreferences mPrefs;
     private ListView list_tweets;
-    
+    private ProgressDialog dialog;
     public TwitterFragment(){}
     
     @Override
@@ -48,6 +49,12 @@ public class TwitterFragment extends Fragment{
         mTwitter = new TwitterFactory().getInstance();
         mTwitter.setOAuthConsumer(TwitterStatics.TWITTER_CONSUMER_KEY, TwitterStatics.TWITTER_CONSUMER_SECRET);
         list_tweets = (ListView)view.findViewById(R.id.tweets_list);
+        dialog = new ProgressDialog(getActivity());
+        dialog.setTitle("Cargando...");
+        dialog.setMessage("Verificando credenciales");
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
         onClick_Login();
         return view;
 	}
@@ -94,6 +101,7 @@ public class TwitterFragment extends Fragment{
                         }
                         @Override
                         public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                        	dialog.dismiss();
                             if (!prevendDoubleCallbackEvent[0] && url.contains(TwitterStatics.TWITTER_CALLBACK_URL)){
                                 prevendDoubleCallbackEvent[0] = true;
                                 String verifier = Uri.parse(url).getQueryParameter("oauth_verifier");
@@ -162,6 +170,8 @@ public class TwitterFragment extends Fragment{
     }
     
     private void showTweets(){
+    	dialog.setMessage("Actualizando tweets");
+    	dialog.show();
     	try {
         	Paging paging = new Paging(1, 200); 
         	final List<twitter4j.Status> stats = mTwitter.getUserTimeline(271733547, paging);
@@ -171,6 +181,7 @@ public class TwitterFragment extends Fragment{
 				public void run() {
 		        	list_tweets.setVisibility(View.VISIBLE);
 		        	list_tweets.setAdapter(new TweetsAdapter(getActivity(), R.layout.tweet_item, stats));
+		        	dialog.dismiss();
 				}
 			});
 		} catch (TwitterException e) {

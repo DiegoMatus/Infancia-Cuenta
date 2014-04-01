@@ -19,7 +19,9 @@ import org.json.JSONObject;
 
 import com.example.infanciacuenta.R;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -98,10 +100,21 @@ public class MainFragment extends Fragment {
     }
 	
 	class GetIndicadores extends AsyncTask<Void, Void, String>{
+		ProgressDialog dialog;
+		@Override
+		protected void onPreExecute() {
+			dialog = new ProgressDialog(getActivity());
+			dialog.setTitle("Por favor espere...");
+			dialog.setMessage("Descargando indicadores");
+			dialog.setCancelable(false);
+			dialog.setCanceledOnTouchOutside(false);
+			dialog.show();
+			super.onPreExecute();
+		}
 		@Override
 		protected String doInBackground(Void... params) {
 			try{
-	        	URI uri=new URI("http://192.168.1.66:8000/home/indicadores/");
+	        	URI uri=new URI("http://192.168.1.66:8001/infanciacuenta/indicadores/");
 	            HttpResponse response=null;
 		        ArrayList<BasicNameValuePair> parametros= new ArrayList<BasicNameValuePair>();
 		         
@@ -124,20 +137,25 @@ public class MainFragment extends Fragment {
 			return null;
 		}
 		
+		@SuppressLint("DefaultLocale")
 		@Override
 		protected void onPostExecute(String result) {
 			System.out.println(result);
 			try{
 				JSONArray json = new JSONObject(result).getJSONObject("result").getJSONArray("fields");
 				final ArrayList<String> ids = new ArrayList<String>();
+				ids.add("------------");
 				int len = json.length();
-				for(int i = 1; i < len; i++)
-					ids.add(json.getJSONObject(i).getString("id"));
+				for(int i = 0; i < len; i++){
+					String cad = json.getJSONObject(i).getString("id");
+					if(!cad.toLowerCase().equals("_id") && !cad.toLowerCase().equals("entidad") && !cad.toLowerCase().equals("año") && !cad.toLowerCase().equals("estado"))
+						ids.add(cad);
+				}
 				getActivity().runOnUiThread(new Runnable() {
 					
 					@Override
 					public void run() {
-						ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line);
+						ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item);
 						adapter.addAll(ids);
 						indicators.setAdapter(adapter);
 					}
@@ -146,6 +164,7 @@ public class MainFragment extends Fragment {
 				e.printStackTrace(); 
 			}
 			working = false;
+			dialog.dismiss();
 		}
 	}
 	
