@@ -91,7 +91,7 @@ public class MainFragment extends Fragment {
 					if(indicators.getSelectedItem() != null){
 						i.putExtra("indicador", indicators.getSelectedItemPosition() != 0 ? indicators.getSelectedItem().toString() : "");
 					}
-					i.putExtra("estado", states.getSelectedItem().toString());
+					i.putExtra("estado", states.getSelectedItemPosition());
 					startActivity(i);
 				}
 			}
@@ -99,6 +99,7 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 	
+	@SuppressLint("DefaultLocale")
 	class GetIndicadores extends AsyncTask<Void, Void, String>{
 		ProgressDialog dialog;
 		@Override
@@ -114,7 +115,7 @@ public class MainFragment extends Fragment {
 		@Override
 		protected String doInBackground(Void... params) {
 			try{
-	        	URI uri=new URI("http://192.168.1.66:8001/infanciacuenta/indicadores/");
+	        	URI uri=new URI("http://mobileapps.dragonflylabs.com.mx/infanciacuenta/indicadores/");
 	            HttpResponse response=null;
 		        ArrayList<BasicNameValuePair> parametros= new ArrayList<BasicNameValuePair>();
 		         

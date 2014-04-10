@@ -25,6 +25,7 @@
 	    android:layout_height="wrap_content"
 	    android:textStyle="bold"
 	    android:gravity="right"
+	    android:layout_toRightOf="@id/title_item"
 	    android:layout_centerVertical="true"
 	    android:id="@+id/amount_item"
 	    android:layout_margin="3dp"

@@ -35,7 +35,7 @@ public class GraphActivity extends Activity{
 	private WebView webview;
 	private ProgressDialog dialog;
 	private String dominio;
-	private String estado;
+	private int estado;
 	private String indicador;
 	private String anio;
 	private ListView list_symbols;
@@ -47,7 +47,7 @@ public class GraphActivity extends Activity{
 		setContentView(R.layout.activity_graph);
 		getActionBar().setTitle("Resultados");
 		dominio = getIntent().getStringExtra("dominio")!= null? getIntent().getStringExtra("dominio") : "";
-		estado = getIntent().getStringExtra("estado")!= null ? getIntent().getStringExtra("estado") : "";
+		estado = getIntent().getIntExtra("estado",0);
 		indicador = getIntent().getStringExtra("indicador")!= null ? getIntent().getStringExtra("indicador") : "";
 		list_symbols = (ListView)findViewById(R.id.simbology);
 		dialog = new ProgressDialog(this);
@@ -70,7 +70,7 @@ public class GraphActivity extends Activity{
 			}
 		});
 		String post = "estado="+estado+"&dominio="+dominio+"&indicador="+indicador+"&tipo=html";
-		webview.postUrl("http://192.168.1.66:8001/infanciacuenta/indicadores_2/", EncodingUtils.getBytes(post, "base64"));
+		webview.postUrl("http://mobileapps.dragonflylabs.com.mx/infanciacuenta/indicadores_2/", EncodingUtils.getBytes(post, "base64"));
 		LoadSimbols simbols = new LoadSimbols();
 		simbols.execute();
 	}
@@ -80,20 +80,18 @@ public class GraphActivity extends Activity{
 		@Override
 		protected String doInBackground(Void... params) {
 			try{
-				URI uri=new URI("http://192.168.1.66:8001/infanciacuenta/indicadores_2/");
+				URI uri=new URI("http://mobileapps.dragonflylabs.com.mx/infanciacuenta/indicadores_2/");
 	            HttpResponse response=null;
 		        ArrayList<BasicNameValuePair> parametros= new ArrayList<BasicNameValuePair>();
 		         
 		        
 		        BasicNameValuePair parametro1=new BasicNameValuePair("dominio",dominio);
-		        BasicNameValuePair parametro2=new BasicNameValuePair("estado",estado);
+		        BasicNameValuePair parametro2=new BasicNameValuePair("estado",String.valueOf(estado));
 		        BasicNameValuePair parametro3=new BasicNameValuePair("indicador",indicador);
-		        BasicNameValuePair parametro4=new BasicNameValuePair("tipo","json");
 		        
 		        parametros.add(parametro1);
 		        parametros.add(parametro2);
 		        parametros.add(parametro3);
-		        parametros.add(parametro4);
 		         
 		        HttpPost post=new HttpPost(uri);
 		        UrlEncodedFormEntity entity=new UrlEncodedFormEntity(parametros,HTTP.UTF_8);
